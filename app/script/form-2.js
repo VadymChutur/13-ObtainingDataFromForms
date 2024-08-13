@@ -13,16 +13,16 @@ radioRef.onchange = function () {
   console.log(selectRef.value);
 };
 
-formRef.onclick = function (event) {
-  event.preventDefault();
-  const formEL = document.querySelector('form');
-  console.log(serialize(formEL));
-};
-
-// formRef.addEventListener('click', (event) => {
-//   const formEL = document.querySelector('form');
-//   console.log(formEL);
+// formRef.onclick = function (event) {
 //   event.preventDefault();
-//   // console.log(event);
+//   const formEL = document.querySelector('form');
 //   console.log(serialize(formEL));
-// });
+// };
+
+formRef.addEventListener('click', (event) => {
+  const formEL = document.querySelector('form');
+  console.log(formEL);
+  event.preventDefault();
+  // console.log(event);
+  console.log(serialize(formEL));
+});
