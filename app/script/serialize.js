@@ -1,6 +1,6 @@
-function serialize(form) {
+export default function serialize(form) {
   if (!form || form.nodeName !== 'FORM') {
-    return;
+    return false;
   }
   let i,
     j,
@@ -9,7 +9,7 @@ function serialize(form) {
     if (form.elements[i].name === '') {
       continue;
     }
-    switch (form.elements[i].name === '') {
+    switch (form.elements[i].nodeName) {
       case 'INPUT':
         switch (form.elements[i].type) {
           case 'text':
@@ -21,18 +21,18 @@ function serialize(form) {
           case 'reset':
           case 'submit':
             q.push(
-              form.elements[i].name +
-                '=' +
-                encodeURIComponent(form.elements[i].value)
+              `${form.elements[i].name}=${encodeURIComponent(
+                form.elements[i].value
+              )}`
             );
             break;
           case 'checkbox':
           case 'radio':
             if (form.elements[i].checked) {
               q.push(
-                form.elements[i].name +
-                  '=' +
-                  encodeURIComponent(form.elements[i].value)
+                `${form.elements[i].name}='${encodeURIComponent(
+                  form.elements[i].value
+                )}`
               );
             }
             break;
@@ -51,18 +51,18 @@ function serialize(form) {
         switch (form.elements[i].type) {
           case 'select-one':
             q.push(
-              form.elements[i].name +
-                '=' +
-                encodeURIComponent(form.elements[i].value)
+              `${form.elements[i].name}=${encodeURIComponent(
+                form.elements[i].value
+              )}`
             );
             break;
           case 'select-multiple':
             for (j = form.elements[i].options.length - 1; j >= 0; j -= 1) {
               if (form.elements[i].options[j].selected) {
                 q.push(
-                  form.elements[i].name +
-                    '=' +
-                    encodeURIComponent(form.elements[i].options[j].value)
+                  `${form.elements[i].name}=${encodeURIComponent(
+                    form.elements[i].options[j].value
+                  )}`
                 );
               }
             }
@@ -75,9 +75,9 @@ function serialize(form) {
           case 'submit':
           case 'button':
             q.push(
-              form.elements[i].name +
-                '=' +
-                encodeURIComponent(form.elements[i].value)
+              `${form.elements[i].name}=${encodeURIComponent(
+                form.elements[i].value
+              )}`
             );
             break;
         }
