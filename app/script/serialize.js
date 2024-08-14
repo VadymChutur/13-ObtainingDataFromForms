@@ -20,6 +20,14 @@ export default function serialize(form) {
           case 'button':
           case 'reset':
           case 'submit':
+          case 'range':
+          case 'datetime-local':
+          case 'month':
+          case 'time':
+          case 'week':
+          case 'color':
+          case 'search':
+          case 'url':
             q.push(
               `${form.elements[i].name}=${encodeURIComponent(
                 form.elements[i].value
@@ -39,6 +47,7 @@ export default function serialize(form) {
         }
         break;
       case 'file':
+      case 'image':
         break;
       case 'TEXTAREA':
         q.push(
